@@ -1,0 +1,37 @@
+# Archivos generados por .NET
+/bin/
+/obj/
+*.csproj.user
+*.suo
+*.user
+*.vs/
+
+# Logs y temporales
+*.log
+logs/
+temp/
+*.tmp
+
+# Archivos de IDE (JetBrains Rider y otros)
+.idea/
+*.iml
+*.DotSettings
+*.sln.DotSettings
+*.sln.DotSettings.user
+
+# Dependencias locales
+/packages/
+/.nuget/
+
+# Archivos sensibles
+*.env
+.env.*
+credentials.*
+secrets.json
+appsettings.Development.json
+
+# Otros archivos comunes
+.DS_Store
+Thumbs.db
+*~
+.*.swp
