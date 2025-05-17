@@ -1,37 +1,108 @@
-# Archivos generados por .NET
-/bin/
-/obj/
-*.csproj.user
+# ----------------------------
+# Directorios generales
+# ----------------------------
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+build/
+artifacts/
+
+# ----------------------------
+# Archivos de Visual Studio / VS Code
+# ----------------------------
 *.suo
 *.user
+*.userosscache
+*.sln.docstates
+*.dotSettings
 *.vs/
+*.VS/
+*.vscode/
+*.idea/
 
-# Logs y temporales
+# ----------------------------
+# Archivos generados por .NET
+# ----------------------------
+bin/
+obj/
+[Bb]in/
+[Oo]bj/
+
+# ----------------------------
+# Pruebas
+# ----------------------------
+TestResults/
+*.trx
+*.coverage
+*.coveragexml
+*.dmp
+
+# ----------------------------
+# Paquetes NuGet
+# ----------------------------
+*.nupkg
+*.snupkg
+packages/
+
+# ----------------------------
+# Logs y archivos temporales
+# ----------------------------
 *.log
-logs/
-temp/
 *.tmp
+*.bak
+*.cache
+*.db
+*.pid
+*.seed
+*.suo
+*.DS_Store
 
-# Archivos de IDE (JetBrains Rider y otros)
-.idea/
-*.iml
-*.DotSettings
-*.sln.DotSettings
-*.sln.DotSettings.user
-
-# Dependencias locales
-/packages/
-/.nuget/
-
-# Archivos sensibles
-*.env
-.env.*
-credentials.*
-secrets.json
+# ----------------------------
+# Configuraciones sensibles (ej: desarrollo)
+# ----------------------------
 appsettings.Development.json
+secrets.json
+.env.local
+.env.development
+.env.*
+!.env.example
 
-# Otros archivos comunes
-.DS_Store
-Thumbs.db
+# ----------------------------
+# Archivos de editor de texto
+# ----------------------------
 *~
-.*.swp
+*.swp
+*.swo
+
+# ----------------------------
+# Frontend (React/Vite)
+# ----------------------------
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+dist
+dist-ssr
+*.local
+node_modules/
+package-lock.json
+dist/
+vite.config.js.map
+ vite.config.ts.map
+.env.local
+.env.development
+.env.production
+.env.*
+!.env.example
+
+# ----------------------------
+# Herramientas adicionales
+# ----------------------------
+/.eslintcache
+/.prettiercache
+coverage/
+.pnpm-store/
