@@ -106,3 +106,4 @@ vite.config.js.map
 /.prettiercache
 coverage/
 .pnpm-store/
+frontend/.env
