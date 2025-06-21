@@ -24,10 +24,10 @@ artifacts/
 # ----------------------------
 # Archivos generados por .NET
 # ----------------------------
-bin/
-obj/
-[Bb]in/
-[Oo]bj/
+/bin/
+/obj/
+/[Bb]in/
+/[Oo]bj/
 
 # ----------------------------
 # Pruebas
