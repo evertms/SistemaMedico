@@ -107,3 +107,4 @@ vite.config.js.map
 coverage/
 .pnpm-store/
 frontend/.env
+/src/SistemaMedico.Domain/obj
