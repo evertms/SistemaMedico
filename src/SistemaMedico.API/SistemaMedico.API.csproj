@@ -11,4 +11,14 @@
         <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="8.1.1" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\SistemaMedico.Application\SistemaMedico.Application.csproj" />
+      <ProjectReference Include="..\SistemaMedico.Infrastructure\SistemaMedico.Infrastructure.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="DTOs\" />
+      <Folder Include="Middlewares\" />
+    </ItemGroup>
+
 </Project>

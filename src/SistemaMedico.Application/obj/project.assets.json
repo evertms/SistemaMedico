@@ -1,11 +1,30 @@
 {
   "version": 3,
   "targets": {
-    "net9.0": {}
+    "net9.0": {
+      "SistemaMedico.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "compile": {
+          "bin/placeholder/SistemaMedico.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/SistemaMedico.Domain.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "SistemaMedico.Domain/1.0.0": {
+      "type": "project",
+      "path": "../SistemaMedico.Domain/SistemaMedico.Domain.csproj",
+      "msbuildProject": "../SistemaMedico.Domain/SistemaMedico.Domain.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net9.0": []
+    "net9.0": [
+      "SistemaMedico.Domain >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\evert\\.nuget\\packages\\": {},
@@ -38,7 +57,11 @@
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\evert\\RiderProjects\\SistemaMedico\\src\\SistemaMedico.Domain\\SistemaMedico.Domain.csproj": {
+              "projectPath": "C:\\Users\\evert\\RiderProjects\\SistemaMedico\\src\\SistemaMedico.Domain\\SistemaMedico.Domain.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

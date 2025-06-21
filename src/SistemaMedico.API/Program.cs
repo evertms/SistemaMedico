@@ -1,3 +1,5 @@
+using SistemaMedico.Infrastructure.Extensions;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Agrega servicios al contenedor
@@ -5,6 +7,7 @@ builder.Services.AddControllers();
 
 // Configura OpenAPI
 builder.Services.AddOpenApi();
+builder.Services.AddInfrastructure(builder.Configuration);
 
 // Configura CORS
 builder.Services.AddCors(options =>
