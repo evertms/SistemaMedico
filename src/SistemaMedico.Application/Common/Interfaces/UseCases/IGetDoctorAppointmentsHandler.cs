@@ -1,5 +1,5 @@
 using SistemaMedico.Application.DTOs;
-using SistemaMedico.Application.UseCases.Appointments.GetDoctorsAppointments;
+using SistemaMedico.Application.UseCases.Appointments.GetDoctorAppointments;
 
 namespace SistemaMedico.Application.Common.Interfaces.UseCases;
 
