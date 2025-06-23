@@ -17,6 +17,7 @@ public class Doctor
     public Specialty Specialty { get; private set; }
 
     public DateTime HireDate { get; private set; }
+    public DateTime? DeactivationDate { get; private set; }
 
     public ICollection<MedicalAppointment> Appointments { get; private set; }
     public ICollection<Diagnosis> Diagnosis { get; private set; }
@@ -89,5 +90,17 @@ public class Doctor
     public IEnumerable<MedicalAppointment> GetPendingAppointments()
     {
         return Appointments.Where(a => a.Status == AppointmentStatus.Pending);
+    }
+    
+    public void Deactivate()
+    {
+        if (DeactivationDate is not null)
+            throw new DomainException("El médico ya fue dado de baja.");
+        DeactivationDate = DateTime.UtcNow;
+    }
+
+    public void Reactivate()
+    {
+        DeactivationDate = null;
     }
 }

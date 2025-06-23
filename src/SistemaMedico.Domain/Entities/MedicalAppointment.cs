@@ -16,7 +16,7 @@ public class MedicalAppointment
     public TimeSpan Duration { get; private set; }
 
     // Relaciones
-    public Patient? Patient { get; private set; }
+    public Patient Patient { get; private set; }
     public Doctor? Doctor { get; private set; }
     public AvailableDoctorSchedule Schedule { get; private set; }
     public Guid? MedicalNoteId { get; private set; }

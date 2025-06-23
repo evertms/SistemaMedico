@@ -12,9 +12,7 @@ public class Patient
     public DateTime DateOfBirth { get; private set; }
     public string PhoneNumber { get; private set; }
 
-    // Relaciones
     public User? User { get; private set; }
-
     private readonly List<MedicalAppointment> _appointments = new();
     public IReadOnlyCollection<MedicalAppointment> Appointments => _appointments.AsReadOnly();
 
@@ -89,4 +87,16 @@ public class Patient
 
         _appointments.Add(appointment);
     }
+    
+    public bool HasOverlappingAppointment(DateTime start, TimeSpan duration)
+    {
+        var end = start + duration;
+        return Appointments.Any(a =>
+        {
+            var aStart = a.ScheduledDate;
+            var aEnd = aStart + a.Duration;
+            return aStart < end && start < aEnd;
+        });
+    }
+
 }
