@@ -24,10 +24,10 @@ artifacts/
 # ----------------------------
 # Archivos generados por .NET
 # ----------------------------
-/bin/
-/obj/
-/[Bb]in/
-/[Oo]bj/
+bin/
+obj/
+[Bb]in/
+[Oo]bj/
 
 # ----------------------------
 # Pruebas
@@ -62,6 +62,7 @@ packages/
 # Configuraciones sensibles (ej: desarrollo)
 # ----------------------------
 appsettings.Development.json
+appsettings.json
 secrets.json
 .env.local
 .env.development
