@@ -5,5 +5,5 @@ namespace SistemaMedico.Application.Common.Interfaces.UseCases;
 
 public interface IGetAllSpecialtiesHandler
 {
-    Task<IEnumerable<SpecialtyDto>> HandleAsync(GetAllSpecialtiesQuery _);
+    Task<IEnumerable<SpecialtyDto>> HandleAsync();
 }

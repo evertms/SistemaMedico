@@ -14,7 +14,7 @@ public class GetAllSpecialtiesHandler : IGetAllSpecialtiesHandler
         _repository = repository;
     }
 
-    public async Task<IEnumerable<SpecialtyDto>> HandleAsync(GetAllSpecialtiesQuery _)
+    public async Task<IEnumerable<SpecialtyDto>> HandleAsync()
     {
         var all = await _repository.GetAllAsync();
 
