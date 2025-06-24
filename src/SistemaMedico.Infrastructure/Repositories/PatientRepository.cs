@@ -29,9 +29,7 @@ public class PatientRepository
     public async Task<bool> ExistsWithEmailAsync(string email)
     {
         return await _context.Users
-            .Include(u => u.Patients)
-            .AnyAsync(u =>
-                u.Email == email &&
-                u.Patients.Any());
+            .Include(u => u.Patient)
+            .AnyAsync(u => u.Email == email);
     }
 }
