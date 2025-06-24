@@ -6,5 +6,5 @@ public interface IAvailableDoctorScheduleRepository : IRepository<AvailableDocto
 {
     Task<IEnumerable<AvailableDoctorSchedule>> GetAvailableByDoctorIdAsync(Guid doctorId);
     Task<bool> ExceedsMaxAppointmentsPerDay(Guid doctorId, int maxAppointments);
-    Task<bool> OverlapsWith(Guid doctorId, DateTime newDate, TimeSpan duration);   
+    Task<bool> OverlapsWith(Guid doctorId, DateTime newDate, TimeSpan duration);
 }
