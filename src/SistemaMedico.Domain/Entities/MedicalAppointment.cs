@@ -22,7 +22,7 @@ public class MedicalAppointment
     public Guid? MedicalNoteId { get; private set; }
     public MedicalNote? MedicalNote { get; private set; }
 
-    protected MedicalAppointment() { }
+    public MedicalAppointment() { }
 
     public MedicalAppointment(
         Guid patientId,

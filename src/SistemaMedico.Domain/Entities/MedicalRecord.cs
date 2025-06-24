@@ -17,7 +17,7 @@ public class MedicalRecord
 
     public Patient Patient { get; private set; }
 
-    protected MedicalRecord() 
+    public MedicalRecord() 
     {
         Notes = new List<MedicalNote>();
         Diagnoses = new List<Diagnosis>();

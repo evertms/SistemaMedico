@@ -17,7 +17,7 @@ public class AvailableDoctorSchedule
     private readonly List<MedicalAppointment> _appointments = new();
     public IReadOnlyCollection<MedicalAppointment> Appointments => _appointments.AsReadOnly();
 
-    protected AvailableDoctorSchedule() { }
+    public AvailableDoctorSchedule() { } // Para usar con EF Core
 
     public AvailableDoctorSchedule(
         Guid doctorId,

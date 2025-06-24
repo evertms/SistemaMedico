@@ -21,7 +21,7 @@ public class Diagnosis
     public Patient Patient { get; private set; }
     public Doctor Doctor { get; private set; }
 
-    protected Diagnosis() { }
+    public Diagnosis() { }
 
     public Diagnosis(
         Guid patientId,

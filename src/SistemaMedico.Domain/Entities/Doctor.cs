@@ -24,7 +24,7 @@ public class Doctor
     public ICollection<MedicalNote> MedicalNotes { get; private set; }
     public ICollection<AvailableDoctorSchedule> Schedules { get; private set; }
 
-    protected Doctor()
+    public Doctor()
     {
         Appointments = new List<MedicalAppointment>();
         Diagnosis = new List<Diagnosis>();

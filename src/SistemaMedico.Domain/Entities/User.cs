@@ -15,7 +15,7 @@ public class User
     public Doctor? Doctor { get; private set; }
     public ICollection<Patient> Patients { get; private set; }
 
-    protected User() 
+    public User() 
     {
         Patients = new List<Patient>();
     }

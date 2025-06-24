@@ -20,7 +20,7 @@ public class Notification
     public User? User { get; private set; }
     public MedicalAppointment? Appointment { get; private set; }
 
-    protected Notification() { }
+    public Notification() { }
 
     public Notification(
         Guid userId,

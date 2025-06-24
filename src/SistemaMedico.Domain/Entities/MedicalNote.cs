@@ -24,7 +24,7 @@ public class MedicalNote
     public MedicalAppointment? Appointment { get; private set; }
     public MedicalRecord? MedicalRecord { get; private set; }
 
-    protected MedicalNote() { }
+    public MedicalNote() { }
 
     public MedicalNote(
         Guid patientId,

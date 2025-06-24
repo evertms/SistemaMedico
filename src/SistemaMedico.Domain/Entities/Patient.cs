@@ -20,7 +20,7 @@ public class Patient
     public ICollection<Diagnosis> Diagnoses { get; private set; }
     public ICollection<MedicalNote> MedicalNotes { get; private set; }
 
-    protected Patient()
+    public Patient()
     {
         Diagnoses = new List<Diagnosis>();
         MedicalNotes = new List<MedicalNote>();
