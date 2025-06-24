@@ -1,42 +1,27 @@
+using Microsoft.EntityFrameworkCore;
 using SistemaMedico.Domain.Entities;
 using SistemaMedico.Domain.Repositories;
+using SistemaMedico.Infrastructure.Data.Context;
 
 namespace SistemaMedico.Infrastructure.Repositories;
 
-public class DiagnosisRepository : IDiagnosisRepository
+public class DiagnosisRepository 
+    : RepositoryBase<Diagnosis>, IDiagnosisRepository
 {
-    public Task<IEnumerable<Diagnosis>> GetAllAsync()
+    public DiagnosisRepository(ApplicationDbContext context)
+        : base(context)
     {
-        throw new NotImplementedException();
     }
 
-    public Task<Diagnosis> GetByIdAsync(Guid id)
+    public async Task<bool> HasMedicalNote(Guid diagnosisId)
     {
-        throw new NotImplementedException();
+        return await _dbSet
+            .AnyAsync(d => d.Id == diagnosisId && d.MedicalNoteId != null);
     }
 
-    public Task AddAsync(Diagnosis entity)
+    public async Task<bool> IsConfirmed(Guid diagnosisId)
     {
-        throw new NotImplementedException();
-    }
-
-    public Task UpdateAsync(Diagnosis entity)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task DeleteAsync(Guid id)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<bool> HasMedicalNote(Guid diagnosisId)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<bool> IsConfirmed(Guid diagnosisId)
-    {
-        throw new NotImplementedException();
+        return await _dbSet
+            .AnyAsync(d => d.Id == diagnosisId && d.IsConfirmed);
     }
 }
