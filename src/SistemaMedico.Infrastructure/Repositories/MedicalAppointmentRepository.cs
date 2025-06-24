@@ -56,4 +56,14 @@ public class MedicalAppointmentRepository
             .OrderBy(a => a.ScheduledDate)
             .ToListAsync();
     }
+    
+    public async Task<List<MedicalAppointment>> GetAppointmentsScheduledWithinAsync(DateTime from, DateTime to)
+    {
+        return await _context.MedicalAppointments
+            .Where(a => a.ScheduledDate >= from && a.ScheduledDate <= to && a.Status == AppointmentStatus.Pending)
+            .Include(a => a.Patient)
+            .ThenInclude(p => p.User)
+            .ToListAsync();
+    }
+
 }

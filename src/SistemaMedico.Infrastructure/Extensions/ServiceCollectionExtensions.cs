@@ -123,6 +123,9 @@ public static class ServiceCollectionExtensions
         // Servicio de correo
         services.Configure<SmtpSettings>(configuration.GetSection("Smtp"));
         services.AddTransient<IEmailService, EmailService>();
+        
+        // Servicio de reminder
+        services.AddHostedService<AppointmentReminderBackgroundService>();
         return services;
     }
 }
