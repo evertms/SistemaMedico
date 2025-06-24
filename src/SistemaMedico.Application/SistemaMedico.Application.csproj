@@ -10,4 +10,8 @@
       <ProjectReference Include="..\SistemaMedico.Domain\SistemaMedico.Domain.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Common\" />
+    </ItemGroup>
+
 </Project>
