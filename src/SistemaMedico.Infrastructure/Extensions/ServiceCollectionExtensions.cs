@@ -95,7 +95,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IMedicalAppointmentRepository, MedicalAppointmentRepository>();
         services.AddScoped<IMedicalNoteRepository, MedicalNoteRepository>();
         services.AddScoped<IMedicalRecordRepository, MedicalRecordRepository>();
-        services.AddScoped<INotificationRepository, INotificationRepository>();
+        services.AddScoped<INotificationRepository, NotificationRepository>();
         services.AddScoped<IPatientRepository, PatientRepository>();
         services.AddScoped<ISpecialtyRepository, SpecialtyRepository>();
         services.AddScoped<IUserRepository, UserRepository>();
