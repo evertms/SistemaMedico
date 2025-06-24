@@ -12,6 +12,12 @@ public class DoctorRepository : RepositoryBase<Doctor>, IDoctorRepository
     {
     }
 
+    public async Task<Doctor?> GetByUserIdAsync(Guid userId)
+    {
+        return await _context.Doctors
+            .FirstOrDefaultAsync(d => d.UserId == userId);
+    }
+    
     public async Task<bool> HasSpecialty(Guid doctorId, Guid specialtyId)
     {
         return await _dbSet

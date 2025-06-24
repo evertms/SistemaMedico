@@ -13,6 +13,11 @@ public class PatientRepository
     {
     }
 
+    public async Task<Patient?> GetByUserIdAsync(Guid userId)
+    {
+        return await _context.Patients
+            .FirstOrDefaultAsync(d => d.UserId == userId);
+    }
     public async Task<bool> HasActiveAppointment(Guid patientId)
     {
         return await _context.MedicalAppointments
