@@ -13,11 +13,10 @@ public class User
     public DateTime RegistrationDate { get; private set; }
 
     public Doctor? Doctor { get; private set; }
-    public ICollection<Patient> Patients { get; private set; }
+    public Patient? Patient { get; private set; }
 
     public User() 
     {
-        Patients = new List<Patient>();
     }
 
     public User(string email, string passwordHash, string phoneNumber, UserRole role)
@@ -29,7 +28,6 @@ public class User
         PhoneNumber = phoneNumber;
         Role = role;
         RegistrationDate = DateTime.UtcNow;
-        Patients = new List<Patient>();
     }
 
     public void UpdateEmail(string newEmail)
@@ -53,19 +51,10 @@ public class User
         if (Role == UserRole.Doctor && Doctor != null)
             throw new DomainException("No se puede cambiar el rol de médico si está asociado como Doctor.");
 
-        if (Role == UserRole.Patient && Patients.Any())
+        if (Role == UserRole.Patient && Patient != null)
             throw new DomainException("No se puede cambiar el rol de paciente si hay pacientes vinculados.");
 
         Role = newRole;
-    }
-
-    public void LinkPatient(Patient patient)
-    {
-        if (Role != UserRole.Patient)
-            throw new DomainException("Solo usuarios con rol Patient pueden tener pacientes vinculados.");
-
-        DomainValidation.EnsureNotNull(patient, nameof(patient));
-        Patients.Add(patient);
     }
 
     private void Validate(string email, string passwordHash, string phoneNumber)
@@ -74,6 +63,14 @@ public class User
         DomainValidation.EnsureNotNullOrEmpty(passwordHash, nameof(passwordHash));
         DomainValidation.EnsureNotNullOrEmpty(phoneNumber, nameof(phoneNumber));
         DomainValidation.EnsureValidEmail(email, nameof(email));
+    }
+
+    public void LinkPatient(Patient patient)
+    {
+        if (Patient is not null)
+            throw new DomainException("Este usuario ya tiene un paciente asignado.");
+        
+        Patient = patient;
     }
 }
 

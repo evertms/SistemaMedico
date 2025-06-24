@@ -11,8 +11,8 @@ public class PatientConfiguration : IEntityTypeConfiguration<Patient>
         builder.HasKey(p => p.Id);
 
         builder.HasOne(p => p.User)
-            .WithMany(u => u.Patients)
-            .HasForeignKey(p => p.UserId)
+            .WithOne(u => u.Patient)
+            .HasForeignKey<Patient>(p => p.UserId)
             .OnDelete(DeleteBehavior.Restrict);
 
         builder.HasOne(p => p.MedicalRecord)
