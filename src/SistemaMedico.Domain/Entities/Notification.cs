@@ -16,7 +16,7 @@ public class Notification
     public DateTime ScheduledAt { get; private set; }
     public DateTime? SentAt { get; private set; }
 
-    // Relaciones (opcional)
+    // Relaciones
     public User? User { get; private set; }
     public MedicalAppointment? Appointment { get; private set; }
 
@@ -48,7 +48,6 @@ public class Notification
         DomainValidation.EnsureNotNullOrEmpty(message, nameof(message));
         DomainValidation.EnsureNotPastDate(scheduledAt, nameof(scheduledAt));
 
-        // Si es una notificación relacionada con una cita, debe tener appointmentId
         if (title.ToLower().Contains("cita") && appointmentId is null)
         {
             throw new DomainException("Las notificaciones relacionadas con citas deben tener un AppointmentId.");
