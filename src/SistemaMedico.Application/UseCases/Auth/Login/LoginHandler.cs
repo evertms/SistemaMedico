@@ -1,5 +1,6 @@
 using SistemaMedico.Application.Common.Interfaces.UseCases;
 using SistemaMedico.Application.Common.Interfaces.Services;
+using SistemaMedico.Domain.Entities;
 
 namespace SistemaMedico.Application.UseCases.Auth.Login;
 
@@ -11,15 +12,21 @@ using SistemaMedico.Domain.Helpers;
 public class LoginHandler : ILoginHandler
 {
     private readonly IUserRepository _userRepository;
+    private readonly IDoctorRepository _doctorRepository;
+    private readonly IPatientRepository _patientRepository;
     private readonly IPasswordHasher _passwordHasher;
     private readonly ITokenService _tokenService;
 
     public LoginHandler(
         IUserRepository userRepository,
+        IDoctorRepository doctorRepository,
+        IPatientRepository patientRepository,
         IPasswordHasher passwordHasher,
         ITokenService tokenService)
     {
         _userRepository = userRepository;
+        _doctorRepository = doctorRepository;
+        _patientRepository = patientRepository;
         _passwordHasher = passwordHasher;
         _tokenService = tokenService;
     }
@@ -35,12 +42,25 @@ public class LoginHandler : ILoginHandler
 
         var token = _tokenService.GenerateToken(user);
 
-        return new LoginResponse
+        var response = new LoginResponse
         {
             UserId = user.Id,
             Email = user.Email,
             Role = user.Role.ToString(),
             Token = token
         };
+
+        if (user.Role == UserRole.Doctor)
+        {
+            var doctor = await _doctorRepository.GetByUserIdAsync(user.Id);
+            response.DoctorId = doctor?.Id;
+        }
+        else if (user.Role == UserRole.Patient)
+        {
+            var patient = await _patientRepository.GetByUserIdAsync(user.Id);
+            response.PatientId = patient?.Id;
+        }
+
+        return response;
     }
 }
