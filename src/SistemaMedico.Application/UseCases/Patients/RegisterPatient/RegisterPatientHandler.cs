@@ -39,6 +39,6 @@ public class RegisterPatientHandler : IRegisterPatientHandler
 
         user.LinkPatient(patient); // lógica de dominio
 
-        return patient.PatientId;
+        return patient.Id;
     }
 }

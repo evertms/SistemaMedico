@@ -5,7 +5,7 @@ namespace SistemaMedico.Domain.Entities;
 
 public class Patient
 {
-    public Guid PatientId { get; private set; }
+    public Guid Id { get; private set; }
     public Guid UserId { get; private set; }
     public string FirstName { get; private set; }
     public string LastName { get; private set; }
@@ -30,7 +30,7 @@ public class Patient
     {
         Validate(firstName, lastName,dateOfBirth, phoneNumber);
 
-        PatientId = Guid.NewGuid();
+        Id = Guid.NewGuid();
         UserId = userId;
         FirstName = firstName;
         LastName = lastName;
@@ -69,7 +69,7 @@ public class Patient
 
     public void AddAppointment(MedicalAppointment appointment)
     {
-        if (appointment.PatientId != PatientId)
+        if (appointment.PatientId != Id)
             throw new DomainException("La cita médica no pertenece a este paciente.");
 
         if (_appointments.Any(a =>
