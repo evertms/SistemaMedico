@@ -29,4 +29,10 @@ public class ApplicationDbContext : DbContext
         modelBuilder.ApplyConfiguration(new PatientConfiguration());
         base.OnModelCreating(modelBuilder);
     }
+    
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        // Configurar para convertir automáticamente DateTime a UTC
+        AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+    }
 }
