@@ -1,4 +1,7 @@
+using Microsoft.EntityFrameworkCore;
+using SistemaMedico.Infrastructure.Data.Context;
 using SistemaMedico.Infrastructure.Extensions;
+using SistemaMedico.Infrastructure.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -37,7 +40,7 @@ if (app.Environment.IsDevelopment())
         options.SwaggerEndpoint("/openapi/v1.json", "Mi API v1");
         options.RoutePrefix = "docs"; // Acceso en /docs
         options.DocumentTitle = "Documentación de mi API";
-        options.DefaultModelsExpandDepth(-1); // Oculta modelos por defecto
+        options.DefaultModelsExpandDepth(-1);
     });
 
     // Redirige desde la raíz (/) a /docs
