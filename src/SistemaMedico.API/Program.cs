@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using SistemaMedico.Application.UseCases.Admin.RegisterAdmin;
 using SistemaMedico.Infrastructure.Data.Context;
 using SistemaMedico.Infrastructure.Extensions;
 using SistemaMedico.Infrastructure.Services;
@@ -11,6 +12,7 @@ builder.Services.AddControllers();
 // Configura OpenAPI
 builder.Services.AddOpenApi();
 builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddScoped<RegisterAdminHandler>(); // Solo para desarrollo
 
 // Configura CORS
 builder.Services.AddCors(options =>

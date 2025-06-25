@@ -1,5 +1,9 @@
+using System.Security.Claims;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using SistemaMedico.Application.Common.Interfaces.Services;
 using SistemaMedico.Application.Common.Interfaces.UseCases;
 using SistemaMedico.Application.UseCases.Appointments.CancelAppointment;
@@ -113,6 +117,32 @@ public static class ServiceCollectionExtensions
             
             return new JwtTokenService(jwtSettings.SecretKey);
         });
+        
+        // Agregar autenticación JWT
+        services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(options =>
+            {
+                var jwtSettings = configuration.GetSection("Jwt").Get<JwtSettings>()
+                                  ?? throw new InvalidOperationException("JWT settings are missing.");
+
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+
+                    ValidIssuer = jwtSettings.Issuer,
+                    ValidAudience = jwtSettings.Audience,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.SecretKey)),
+
+                    RoleClaimType = ClaimTypes.Role // 👈 Permite usar [Authorize(Roles = "Doctor")]
+                };
+            });
         
         // Password hasher
         services.AddScoped<IPasswordHasher, BcryptPasswordHasher>();
