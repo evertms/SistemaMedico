@@ -4,7 +4,6 @@ const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
 });
 
-// Agregar interceptor para logging
 api.interceptors.request.use(request => {
   console.log('URL de la solicitud:', request.url);
   console.log('URL completa:', request.baseURL + request.url);
