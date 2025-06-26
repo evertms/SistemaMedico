@@ -8,6 +8,7 @@ using SistemaMedico.Application.Common.Interfaces.Services;
 using SistemaMedico.Application.Common.Interfaces.UseCases;
 using SistemaMedico.Application.UseCases.Appointments.CancelAppointment;
 using SistemaMedico.Application.UseCases.Appointments.GetDoctorAppointments;
+using SistemaMedico.Application.UseCases.Appointments.GetMyPendingAppointments;
 using SistemaMedico.Application.UseCases.Appointments.RescheduleAppointment;
 using SistemaMedico.Application.UseCases.Appointments.ScheduleAppointment;
 using SistemaMedico.Application.UseCases.Auth.Login;
@@ -61,6 +62,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IGetDoctorAppointmentsHandler, GetDoctorAppointmentsHandler>();
         services.AddScoped<IGetDoctorsBySpecialtyHandler, GetDoctorsBySpecialtyHandler>();
         services.AddScoped<IGetMyMedicalRecordHandler, GetMyMedicalRecordHandler>();
+        services.AddScoped<IGetMyPendingAppointmentsHandler, GetMyPendingAppointmentsHandler>();
         services.AddScoped<IGetPatientMedicalRecordHandler, GetPatientMedicalRecordHandler>();
         services.AddScoped<ILoginHandler, LoginHandler>();
         services.AddScoped<IRegisterPatientHandler, RegisterPatientHandler>();

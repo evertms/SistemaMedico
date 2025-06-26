@@ -9,7 +9,7 @@ public class AvailableDoctorSchedule
     public Guid DoctorId { get; private set; }
 
     public DateTime StartDate { get; private set; }
-    public TimeSpan Duration { get; private set; }
+    public TimeSpan Duration { get; private set; } = TimeSpan.FromMinutes(30);
 
     public bool IsBooked { get; private set; }
 
