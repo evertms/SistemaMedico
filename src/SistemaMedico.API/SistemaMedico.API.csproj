@@ -20,9 +20,4 @@
       <ProjectReference Include="..\SistemaMedico.Infrastructure\SistemaMedico.Infrastructure.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="DTOs\" />
-      <Folder Include="Middlewares\" />
-    </ItemGroup>
-
 </Project>
