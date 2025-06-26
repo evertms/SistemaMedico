@@ -3,8 +3,10 @@ using Microsoft.AspNetCore.Mvc;
 using SistemaMedico.Application.Common.Interfaces.UseCases;
 using SistemaMedico.Application.UseCases.Appointments.CancelAppointment;
 using SistemaMedico.Application.UseCases.Appointments.GetDoctorAppointments;
+using SistemaMedico.Application.UseCases.Appointments.GetMyPendingAppointments;
 using SistemaMedico.Application.UseCases.Appointments.RescheduleAppointment;
 using SistemaMedico.Application.UseCases.Appointments.ScheduleAppointment;
+using SistemaMedico.Application.Common.Extensions;
 
 namespace SistemaMedico.API.Controllers;
 
@@ -16,17 +18,20 @@ public class AppointmentsController : ControllerBase
     private readonly ICancelAppointmentHandler _cancelHandler;
     private readonly IRescheduleAppointmentHandler _rescheduleHandler;
     private readonly IGetDoctorAppointmentsHandler _getAppointmentsHandler;
+    private readonly IGetMyPendingAppointmentsHandler _getMyPendingAppointmentsHandler;
 
     public AppointmentsController(
         IScheduleAppointmentHandler scheduleHandler,
         ICancelAppointmentHandler cancelHandler,
         IRescheduleAppointmentHandler rescheduleHandler,
-        IGetDoctorAppointmentsHandler getAppointmentsHandler)
+        IGetDoctorAppointmentsHandler getAppointmentsHandler,
+        IGetMyPendingAppointmentsHandler getMyPendingAppointmentsHandler)
     {
         _scheduleHandler = scheduleHandler;
         _cancelHandler = cancelHandler;
         _rescheduleHandler = rescheduleHandler;
         _getAppointmentsHandler = getAppointmentsHandler;
+        _getMyPendingAppointmentsHandler = getMyPendingAppointmentsHandler;
     }
 
     /// <summary>
@@ -72,5 +77,22 @@ public class AppointmentsController : ControllerBase
         var query = new GetDoctorAppointmentsQuery{DoctorId = doctorId};
         var result = await _getAppointmentsHandler.HandleAsync(query);
         return Ok(result);
+    }
+    
+    [HttpGet("my-pending")]
+    [Authorize(Roles = "Patient")]
+    public async Task<IActionResult> GetMyPendingAppointments()
+    {
+        try
+        {
+            var patientId = User.GetPatientId();
+            var query = new GetMyPendingAppointmentsQuery(patientId);
+            var result = await _getMyPendingAppointmentsHandler.HandleAsync(query);
+            return Ok(result);
+        }
+        catch (UnauthorizedAccessException ex)
+        {
+            return Unauthorized(new { message = ex.Message });
+        }
     }
 }

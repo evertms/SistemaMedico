@@ -10,4 +10,5 @@ public interface IMedicalAppointmentRepository : IRepository<MedicalAppointment>
     Task<bool> IsScheduleAvailable(Guid scheduleId);
     Task<IEnumerable<MedicalAppointment>> GetByDoctorAsync(Guid doctorId);
     Task<List<MedicalAppointment>> GetAppointmentsScheduledWithinAsync(DateTime from, DateTime to);
+    Task<List<MedicalAppointment>> GetPendingByPatientIdAsync(Guid patientId);
 }
