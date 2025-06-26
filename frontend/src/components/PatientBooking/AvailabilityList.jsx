@@ -9,14 +9,14 @@ const AvailabilityList = ({ doctorId, onSelect }) => {
     http.get(ENDPOINTS.DOCTORS.AVAILABLE_SCHEDULES(doctorId))
       .then(r => setSlots(r.data));
   }, [doctorId]);
-
+  
   return (
     <div className="mb-3">
       <label className="form-label">Horarios disponibles</label>
       <ul className="list-group">
         {slots.map(slot => (
           <li
-            key={slot.id}
+            key={slot.scheduleId}
             className="list-group-item"
             onClick={() => onSelect(slot)}
             style={{ cursor: 'pointer' }}

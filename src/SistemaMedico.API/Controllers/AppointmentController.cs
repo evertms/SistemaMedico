@@ -83,6 +83,8 @@ public class AppointmentsController : ControllerBase
     [Authorize(Roles = "Patient")]
     public async Task<IActionResult> GetMyPendingAppointments()
     {
+        Console.WriteLine(User.Identity?.IsAuthenticated);
+        Console.WriteLine("ENTRÓ AL CONTROLADOR");
         try
         {
             var patientId = User.GetPatientId();

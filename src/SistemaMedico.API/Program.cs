@@ -22,8 +22,8 @@ builder.Services.AddCors(options =>
         {
             builder
                 .WithOrigins("http://localhost:5173") // URL del frontend
-                .AllowAnyMethod()
-                .AllowAnyHeader();
+                .AllowAnyHeader()
+                .AllowAnyMethod();
         });
 });
 
@@ -55,6 +55,9 @@ if (app.Environment.IsDevelopment())
 
 // Habilita CORS
 app.UseCors("AllowReact");
+
+// Habilita autenticación
+app.UseAuthentication();
 
 // Habilita autorización
 app.UseAuthorization();

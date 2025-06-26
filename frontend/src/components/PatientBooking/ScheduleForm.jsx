@@ -5,16 +5,32 @@ import { useNavigate } from 'react-router-dom';
 
 const ScheduleForm = ({ slot }) => {
   const navigate = useNavigate();
-
   const handleConfirm = async () => {
-    const patientId = localStorage.getItem('patientId');
-    await http.post(ENDPOINTS.APPOINTMENTS.SCHEDULE, {
-      doctorId: slot.doctorId,
-      patientId,
-      scheduleId: slot.id
-    });
-    navigate('/patient/dashboard');
+    try {
+      const patientId = localStorage.getItem('patientId');
+      console.log({
+        doctorId: slot.doctorId,
+        patientId,
+        scheduleId: slot.scheduleId,
+        duration: slot.duration,
+        reasonForVisit: "Consulta general"
+      });
+
+      await http.post(ENDPOINTS.APPOINTMENTS.SCHEDULE, {
+        doctorId: slot.doctorId,
+        patientId,
+        scheduleId: slot.scheduleId,
+        duration: slot.duration,
+        reasonForVisit: "Consulta general"
+      });
+
+      navigate('/patient/dashboard');
+    } catch (error) {
+      console.error('Error al agendar cita:', error.response?.data || error.message);
+      alert('Error al agendar cita: ' + (error.response?.data?.message || error.message));
+    }
   };
+
 
   return (
     <div className="mt-3">

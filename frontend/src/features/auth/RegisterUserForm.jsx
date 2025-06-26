@@ -18,7 +18,7 @@ const RegisterUserForm = () => {
         email,
         password,      // El API hará el hash
         phoneNumber: phone,
-        role: "Patient" // Por defecto
+        role: 0 // Patient or defecto
       });
 
       // Guardar el userId para el siguiente paso

@@ -7,6 +7,7 @@ export const ENDPOINTS = {
     CANCEL: '/api/Appointments/cancel',
     RESCHEDULE: '/api/Appointments/reschedule',
     GET_BY_DOCTOR: (doctorId) => `/api/Appointments/doctor/${doctorId}`,
+    GET_MY_PENDING: '/api/Appointments/my-pending'
   }, 
   AUTH: {
     LOGIN: '/api/Auth/login',
@@ -24,20 +25,20 @@ export const ENDPOINTS = {
     GET_BY_PATIENT: (patientId, doctorId) =>
       `/api/MedicalRecords/${patientId}${doctorId ? `?doctorId=${doctorId}` : ''}`,
     GET_MY_MEDICAL_RECORD: 'api/MedicalRecords/me',
-    DOWNLOAD_MY_MEDICAL_RECORD: 'api/MedicalRecords/me/download'
+    DOWNLOAD_MY_MEDICAL_RECORD: '/api/MedicalRecords/me/download'
   },
   PATIENTS: {
-    REGISTER: 'api/Patients/register',
+    REGISTER: '/api/Patients/register',
     UNLINK: (patientId) => `/api/Patients/${patientId}/unlink`,
   },
   SCHEDULES: {
-    CREATE_AVAILABILITY: 'api/Schedules/availability'
+    CREATE_AVAILABILITY: '/api/Schedules/availability'
   },
   SPECIALTIES: {
     GET_ALL: '/api/Specialties',
     GET_DOCTORS_BY_SPECIALTY: (specialtyId) => `/api/Specialties/${specialtyId}/doctors`,
   },
   USERS:{
-    REGISTER: 'api/Users/register'
+    REGISTER: '/api/Users/register'
   }
 };

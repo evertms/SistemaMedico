@@ -145,6 +145,7 @@ public static class ServiceCollectionExtensions
                     RoleClaimType = ClaimTypes.Role // 👈 Permite usar [Authorize(Roles = "Doctor")]
                 };
             });
+        services.AddAuthorization();
         
         // Password hasher
         services.AddScoped<IPasswordHasher, BcryptPasswordHasher>();
