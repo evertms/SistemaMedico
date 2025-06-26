@@ -8,6 +8,7 @@ import PatientBooking from './pages/patient/PatientBooking'
 import RegisterUserForm from './features/auth/RegisterUserForm';
 import RegisterPatientForm from './features/patient/RegisterPatientForm';
 import PatientDashboard from './pages/patient/PatientDashboard'
+import ReprogramAppointment from './pages/patient/ReprogramAppointment'
 
 
 function App() {
@@ -19,9 +20,9 @@ function App() {
       <Route path="/register" element={<RegisterUserForm />} />
       <Route path="/register/patient" element={<RegisterPatientForm />} />
       <Route path="/admin/dashboard" element={<AdminDashboard />}/>
-      {<Route path="/patient/dashboard" element={<PatientDashboard />} />}
+      <Route path="/patient/dashboard" element={<PatientDashboard />} />
       <Route path="/patient/book" element={<PatientBooking />} />
-
+      <Route path="/patient/reschedule" element={<ReprogramAppointment />} />
     </Routes>
   )
 }

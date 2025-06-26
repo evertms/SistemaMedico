@@ -32,6 +32,30 @@ const PatientDashboard = () => {
     navigate("/patient/book");
   };
 
+  const handleReschedule = (appointment) => {
+    // Puedes pasar el appointment por estado o por params
+    navigate("/patient/reschedule", { state: { appointment } });
+  };
+
+  const handleCancel = async (appointmentId) => {
+    const patientId = localStorage.getItem("patientId");
+
+    if (!window.confirm("¿Estás seguro que deseas cancelar esta cita?")) return;
+
+    try {
+      await http.post(ENDPOINTS.APPOINTMENTS.CANCEL, {
+        appointmentId,
+        patientId
+      });
+      alert("Cita cancelada exitosamente.");
+      fetchAppointments(); // recargar citas
+    } catch (error) {
+      console.error("Error al cancelar cita:", error);
+      alert("Hubo un error al cancelar la cita.");
+    }
+  };
+
+
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -67,8 +91,18 @@ const PatientDashboard = () => {
                       Hora: {new Date(appointment.scheduledDate).toLocaleTimeString()}
                     </p>
                     <div className="d-flex justify-content-between">
-                      <button className="btn btn-warning btn-sm">Reprogramar</button>
-                      <button className="btn btn-danger btn-sm">Cancelar</button>
+                      <button
+                        className="btn btn-warning btn-sm"
+                        onClick={() => handleReschedule(appointment)}
+                      >
+                        Reprogramar
+                      </button>
+                      <button
+                        className="btn btn-danger btn-sm"
+                        onClick={() => handleCancel(appointment.id)}
+                      >
+                        Cancelar
+                      </button>
                     </div>
                   </div>
                 </div>

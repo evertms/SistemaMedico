@@ -26,6 +26,9 @@ public class RescheduleAppointmentHandler : IRescheduleAppointmentHandler
         if (appointment.PatientId != command.PatientId)
             throw new DomainException("No tienes permiso para reprogramar esta cita.");
 
+        var oldSchedule = await _scheduleRepository.GetByIdAsync(appointment.ScheduleId);
+        oldSchedule?.Release();
+        
         var newSchedule = await _scheduleRepository.GetByIdAsync(command.NewScheduleId);
         if (newSchedule is null || newSchedule.IsBooked)
             throw new DomainException("El nuevo horario no está disponible.");
@@ -35,5 +38,8 @@ public class RescheduleAppointmentHandler : IRescheduleAppointmentHandler
 
         await _appointmentRepository.UpdateAsync(appointment);
         await _scheduleRepository.UpdateAsync(newSchedule);
+
+        if (oldSchedule is not null)
+            await _scheduleRepository.UpdateAsync(oldSchedule);
     }
 }

@@ -1,5 +1,6 @@
 using SistemaMedico.Application.Common.Interfaces.UseCases;
 using SistemaMedico.Application.DTOs;
+using SistemaMedico.Domain.Entities;
 using SistemaMedico.Domain.Repositories;
 
 namespace SistemaMedico.Application.UseCases.Appointments.GetMyPendingAppointments;
@@ -20,6 +21,7 @@ public class GetMyPendingAppointmentsHandler : IGetMyPendingAppointmentsHandler
         return appointments.Select(a => new AppointmentDto
         {
             Id = a.Id,
+            DoctorId = a.DoctorId,
             DoctorName = $"{a.Doctor?.FirstName} {a.Doctor?.LastName}",
             ScheduledDate = a.ScheduledDate,
             Status = a.Status.ToString(),
