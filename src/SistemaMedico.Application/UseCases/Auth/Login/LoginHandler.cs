@@ -40,27 +40,31 @@ public class LoginHandler : ILoginHandler
         if (!_passwordHasher.Verify(command.Password, user.PasswordHash))
             throw new DomainException("Correo o contraseña incorrectos.");
 
-        var token = _tokenService.GenerateToken(user);
-
-        var response = new LoginResponse
-        {
-            UserId = user.Id,
-            Email = user.Email,
-            Role = user.Role.ToString(),
-            Token = token
-        };
+        Guid? doctorId = null;
+        Guid? patientId = null;
 
         if (user.Role == UserRole.Doctor)
         {
             var doctor = await _doctorRepository.GetByUserIdAsync(user.Id);
-            response.DoctorId = doctor?.Id;
+            doctorId = doctor?.Id;
         }
         else if (user.Role == UserRole.Patient)
         {
             var patient = await _patientRepository.GetByUserIdAsync(user.Id);
-            response.PatientId = patient?.Id;
+            patientId = patient?.Id;
         }
 
-        return response;
+        var token = _tokenService.GenerateToken(user, doctorId, patientId);
+
+        return new LoginResponse
+        {
+            UserId = user.Id,
+            Email = user.Email,
+            Role = user.Role.ToString(),
+            Token = token,
+            DoctorId = doctorId,
+            PatientId = patientId
+        };
     }
+
 }

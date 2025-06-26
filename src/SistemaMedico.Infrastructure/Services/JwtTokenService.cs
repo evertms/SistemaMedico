@@ -16,14 +16,20 @@ public class JwtTokenService : ITokenService
         _jwtSecret = jwtSecret;
     }
 
-    public string GenerateToken(User user)
+    public string GenerateToken(User user, Guid? doctorId = null, Guid? patientId = null)
     {
-        var claims = new[]
+        var claims = new List<Claim>
         {
             new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
             new Claim(ClaimTypes.Email, user.Email),
             new Claim(ClaimTypes.Role, user.Role.ToString())
         };
+
+        if (patientId.HasValue)
+            claims.Add(new Claim("patientId", patientId.Value.ToString()));
+
+        if (doctorId.HasValue)
+            claims.Add(new Claim("doctorId", doctorId.Value.ToString()));
 
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSecret));
         var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
@@ -38,4 +44,5 @@ public class JwtTokenService : ITokenService
 
         return new JwtSecurityTokenHandler().WriteToken(token);
     }
+
 }
